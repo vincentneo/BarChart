@@ -48,8 +48,8 @@ public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : Vi
     public var body: some View {
         GeometryReader { rootProxy in
             HStack {
-                GeometryReader { proxy in
-                    ScrollView(.horizontal) {
+                ScrollView(.horizontal) {
+                    GeometryReader { proxy in
                         ZStack {
                             CoordinateSystemView(yAxis: self.yAxis,
                                                  xAxis: self.xAxis,
@@ -71,10 +71,8 @@ public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : Vi
                         }
                         
                     }
+                    YAxisLabelView(yAxis: yAxis, height: rootProxy.size.height)
                 }
-                
-                YAxisLabelView(yAxis: yAxis, height: rootProxy.size.height)
-                
             }
         }
     }
