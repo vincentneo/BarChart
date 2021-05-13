@@ -46,33 +46,30 @@ public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : Vi
     }
     
     public var body: some View {
-        GeometryReader { rootProxy in
+        GeometryReader { proxy in
             HStack {
                 ScrollView(.horizontal) {
-                    GeometryReader { proxy in
-                        ZStack {
-                            CoordinateSystemView(yAxis: self.yAxis,
-                                                 xAxis: self.xAxis,
-                                                 frameSize: proxy.size).id(UUID())
-                                .onReceive(self.config.objectWillChange) { _ in
-                                    self.yAxis = YAxis(frameHeight: self.yAxisHeight(proxy.size.height),
-                                                       data: self.config.data.yValues,
-                                                       ref: self.config.yAxis,
-                                                       labelsCTFont: self.config.labelsCTFont)
-                                    self.xAxis = XAxis(frameWidth: proxy.size.width - self.yAxis.maxLabelWidth,
-                                                       data: self.config.data.entries,
-                                                       ref: self.config.xAxis,
-                                                       labelsCTFont: self.config.labelsCTFont)
-                                }
-                            self.selectionView
-                            BarChartCollectionView(yAxis: self.yAxis,
-                                                   xAxis: self.xAxis,
-                                                   selectionCallback: self.$selectionCallback)
-                        }
-                        
+                    ZStack {
+                        CoordinateSystemView(yAxis: self.yAxis,
+                                             xAxis: self.xAxis,
+                                             frameSize: proxy.size).id(UUID())
+                            .onReceive(self.config.objectWillChange) { _ in
+                                self.yAxis = YAxis(frameHeight: self.yAxisHeight(proxy.size.height),
+                                                   data: self.config.data.yValues,
+                                                   ref: self.config.yAxis,
+                                                   labelsCTFont: self.config.labelsCTFont)
+                                self.xAxis = XAxis(frameWidth: proxy.size.width - self.yAxis.maxLabelWidth,
+                                                   data: self.config.data.entries,
+                                                   ref: self.config.xAxis,
+                                                   labelsCTFont: self.config.labelsCTFont)
+                            }
+                        self.selectionView
+                        BarChartCollectionView(yAxis: self.yAxis,
+                                               xAxis: self.xAxis,
+                                               selectionCallback: self.$selectionCallback)
                     }
-                    YAxisLabelView(yAxis: yAxis, height: rootProxy.size.height)
                 }
+                //YAxisLabelView(yAxis: yAxis, frameSize: proxy.size)
             }
         }
     }
