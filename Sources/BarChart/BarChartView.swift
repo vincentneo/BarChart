@@ -69,7 +69,7 @@ public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : Vi
                                                selectionCallback: self.$selectionCallback)
                     }
                 }
-                //YAxisLabelView(yAxis: yAxis, frameSize: proxy.size)
+                YAxisLabelView(yAxis: yAxis, frameSize: proxy.size)
             }
         }
     }
