@@ -26,7 +26,7 @@
 
 import SwiftUI
 
-public typealias BarChartView = SelectableBarChartView<EmptyView>
+public typealias BarChartView = SelectableBarChartView<EmptyView, Color>
 
 #if !os(tvOS)
 public extension SelectableBarChartView {

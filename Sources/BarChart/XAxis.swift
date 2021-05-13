@@ -40,7 +40,7 @@ struct XAxis: Identifiable {
     init(frameWidth: CGFloat = 0,
          data: [ChartDataEntry] = [],
          ref: XAxisReference = XAxisReference(),
-         labelsCTFont: CTFont = ChartConfiguration.defaultLabelsCTFont) {
+         labelsCTFont: CTFont = ChartConfigurtationDefaults.ctFont) {
         self.labelsCTFont = labelsCTFont
         self.frameWidth = frameWidth
         self.data = data

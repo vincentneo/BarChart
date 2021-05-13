@@ -50,7 +50,7 @@ struct YAxis: Identifiable {
     init(frameHeight: CGFloat = 0,
          data: [Double] = [],
          ref: YAxisReference = YAxisReference(),
-         labelsCTFont: CTFont = ChartConfiguration.defaultLabelsCTFont) {
+         labelsCTFont: CTFont = ChartConfigurtationDefaults.ctFont) {
         self.labelsCTFont = labelsCTFont
         self.frameHeight = frameHeight
         self.data = data

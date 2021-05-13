@@ -26,11 +26,10 @@
 
 import SwiftUI
 
-struct BarChartCollectionView: View {
+struct BarChartCollectionView<S: ShapeStyle>: View {
     let yAxis: YAxis
     let xAxis: XAxis
-    let gradient: Gradient?
-    let color: Color
+    let fill: S
     @Binding var selectionCallback: ((ChartDataEntry, CGPoint) -> Void)?
     
     var body: some View {
@@ -40,8 +39,7 @@ struct BarChartCollectionView: View {
                     BarChartCell(width: self.xAxis.layout.barWidth!,
                                  height: abs(self.barHeight(at: index)),
                                  cornerRadius: 3.0,
-                                 gradient: self.gradient,
-                                 color: self.color)
+                                 fill: fill)
                         .offset(y: self.offsetY(at: index))
                         .onSelect {
                             let entry = self.xAxis.data[index]

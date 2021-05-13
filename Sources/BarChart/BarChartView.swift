@@ -26,18 +26,18 @@
 
 import SwiftUI
 
-public struct SelectableBarChartView<SelectionView: View> : View {
-    @ObservedObject var config: ChartConfiguration
+public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : View {
+    @ObservedObject var config: ChartConfiguration<Fill>
     @State var xAxis = XAxis()
     @State var yAxis = YAxis()
     @State var selectionCallback: ((ChartDataEntry, CGPoint) -> Void)?
     var selectionView: SelectionView?
     
-    public init(config: ChartConfiguration) {
+    public init(config: ChartConfiguration<Fill>) {
         self.config = config
     }
     
-    init(config: ChartConfiguration,
+    init(config: ChartConfiguration<Fill>,
          selectionCallback: ((ChartDataEntry, CGPoint) -> Void)? = nil,
          selectionView: SelectionView? = nil) {
         self.init(config: config)
@@ -64,8 +64,7 @@ public struct SelectableBarChartView<SelectionView: View> : View {
                 self.selectionView
                 BarChartCollectionView(yAxis: self.yAxis,
                                        xAxis: self.xAxis,
-                                       gradient: self.config.data.gradientColor?.gradient(),
-                                       color: self.config.data.color,
+                                       fill: self.config.data.fill,
                                        selectionCallback: self.$selectionCallback)
             }
         }

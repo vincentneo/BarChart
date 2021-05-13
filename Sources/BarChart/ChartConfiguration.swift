@@ -27,16 +27,19 @@
 import SwiftUI
 import Combine
 
-public class ChartConfiguration: ObservableObject {
-    @Published public var data = ChartData()
+public class ChartConfigurtationDefaults {
+    static let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), 12, nil)
+}
+
+public class ChartConfiguration<Fill: ShapeStyle>: ObservableObject {
+    @Published public var data = ChartData<Fill>()
     public var xAxis = XAxisReference()
     public var yAxis = YAxisReference()
     
     private var xAxisCancellable: AnyCancellable?
     private var yAxisCancellable: AnyCancellable?
     
-    static let defaultLabelsCTFont = CTFontCreateWithName(("SFProText-Regular" as CFString), 12, nil)
-    @Published public var labelsCTFont: CTFont = ChartConfiguration.defaultLabelsCTFont
+    @Published public var labelsCTFont: CTFont = ChartConfigurtationDefaults.ctFont
     
     public init() {
         self.xAxisCancellable = self.xAxis.objectWillChange.sink(receiveValue: { _ in

@@ -37,14 +37,9 @@ public struct ChartDataEntry: Identifiable, Equatable {
     }
 }
 
-public struct ChartData {
+public struct ChartData<S: ShapeStyle> {
     public var entries: [ChartDataEntry] = []
-    public var gradientColor: GradientColor?
-    public var color: Color = .red {
-        didSet {
-            self.gradientColor = nil
-        }
-    }
+    public var fill: S = Color.red as! S
     
     var yValues: [Double] {
         return self.entries.map { $0.y }

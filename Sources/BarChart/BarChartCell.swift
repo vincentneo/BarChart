@@ -26,24 +26,15 @@
 
 import SwiftUI
 
-struct BarChartCell: View {
+struct BarChartCell<S: ShapeStyle>: View {
     let width, height, cornerRadius: CGFloat
-    let gradient: Gradient?
-    let color: Color
+    let fill: S
     
     var body: some View {
         Group {
-            if self.gradient != nil {
-                BarShape(cornerRadius: self.cornerRadius,
-                         corners: RoundedCorner.allCases)
-                    .fill(LinearGradient(gradient: self.gradient!,
-                                         startPoint: .bottom,
-                                         endPoint: .top))
-            } else {
-                BarShape(cornerRadius: self.cornerRadius,
-                         corners: RoundedCorner.allCases)
-                    .fill(self.color)
-            }
+            BarShape(cornerRadius: self.cornerRadius,
+                     corners: RoundedCorner.allCases)
+                .fill(fill)
         }
         .frame(width: self.width, height: self.height)
     }
