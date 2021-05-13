@@ -172,9 +172,7 @@ struct YAxisLabelView: View {
                           ctFont: self.yAxis.labelsCTFont,
                           color: self.yAxis.ref.labelsColor)
                     .offset(y: self.labelOffsetY(at: index))
-                if index != self.yAxis.formattedLabels().count - 1 {
-                    Spacer()
-                }
+                
             }
         }
     }
