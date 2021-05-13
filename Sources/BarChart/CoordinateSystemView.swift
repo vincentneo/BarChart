@@ -97,6 +97,33 @@ struct XAxisView<Fill: ShapeStyle>: View {
                          style: self.xAxis.ref.ticksStyle,
                          color: self.xAxis.ref.ticksColor,
                          isInverted: false, isYAt0: false)
+            }
+        }
+    }
+
+    func tickX(at index: Int) -> CGFloat {
+        let chartEntry = self.xAxis.chartEntry(at: index)
+        guard let indexAtFullRange = self.xAxis.data.firstIndex(where: { $0 == chartEntry }),
+            let centre = self.xAxis.layout.barCentre(at: indexAtFullRange) else { return 0 }
+        return centre
+    }
+    
+    func tickPoints(index: Int) -> (CGPoint, CGPoint) {
+        let x = self.tickX(at: index)
+        let labelsHeight = String().height(ctFont: self.xAxis.labelsCTFont)
+        let startY = labelsHeight / 2
+        let endY = self.frameSize.height - labelsHeight * 1.5
+        return (CGPoint(x: x, y: startY), CGPoint(x: x, y: endY))
+    }
+}
+
+struct XAxisLabelView<Fill: ShapeStyle>: View {
+    let xAxis: XAxis<Fill>
+    let frameSize: CGSize
+    
+    var body: some View {
+        ForEach((0..<self.xAxis.formattedLabels().count), id: \.self) { index in
+            VStack(alignment: .center) {
                 LabelView(text: self.xAxis.formattedLabels()[index],
                           ctFont: self.xAxis.labelsCTFont,
                           color: self.xAxis.ref.labelsColor)
@@ -116,14 +143,6 @@ struct XAxisView<Fill: ShapeStyle>: View {
         guard let indexAtFullRange = self.xAxis.data.firstIndex(where: { $0 == chartEntry }),
             let centre = self.xAxis.layout.barCentre(at: indexAtFullRange) else { return 0 }
         return centre
-    }
-    
-    func tickPoints(index: Int) -> (CGPoint, CGPoint) {
-        let x = self.tickX(at: index)
-        let labelsHeight = String().height(ctFont: self.xAxis.labelsCTFont)
-        let startY = labelsHeight / 2
-        let endY = self.frameSize.height - labelsHeight * 1.5
-        return (CGPoint(x: x, y: startY), CGPoint(x: x, y: endY))
     }
 }
 
