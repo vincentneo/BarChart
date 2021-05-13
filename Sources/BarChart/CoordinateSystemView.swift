@@ -133,12 +133,12 @@ struct YAxisView: View {
     
     var body: some View {
         ForEach((0..<self.yAxis.formattedLabels().count), id: \.self) { index in
-            HStack(alignment: .center) {
+           // HStack(alignment: .center) {
                 TickView(points: self.tickPoints(index: index),
                          style: self.yAxis.ref.ticksStyle,
                          color: self.yAxis.ref.ticksColor,
                          isInverted: true, isYAt0: self.yAxis.labelValue(at: index) == 0)
-            }
+           // }
         }
     }
     
@@ -166,12 +166,13 @@ struct YAxisLabelView: View {
     let frameSize: CGSize
     
     var body: some View {
-        ForEach((0..<self.yAxis.formattedLabels().count), id: \.self) { index in
-            VStack(alignment: .center) {
+        VStack(alignment: .center) {
+            ForEach((0..<self.yAxis.formattedLabels().count), id: \.self) { index in
                 LabelView(text: self.yAxis.formattedLabels()[index],
                           ctFont: self.yAxis.labelsCTFont,
                           color: self.yAxis.ref.labelsColor)
-                            .offset(y: self.labelOffsetY(at: index))
+                    .offset(y: self.labelOffsetY(at: index))
+                
             }
         }
     }
