@@ -46,7 +46,7 @@ public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : Vi
     }
     
     public var body: some View {
-        ScrollView {
+        ScrollView(.horizontal) {
             GeometryReader { proxy in
                 HStack {
                     ZStack {
