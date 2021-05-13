@@ -167,7 +167,7 @@ struct YAxisLabelView: View {
     
     var body: some View {
         ForEach((0..<self.yAxis.formattedLabels().count), id: \.self) { index in
-            HStack(alignment: .center) {
+            VStack(alignment: .center) {
                 LabelView(text: self.yAxis.formattedLabels()[index],
                           ctFont: self.yAxis.labelsCTFont,
                           color: self.yAxis.ref.labelsColor)
