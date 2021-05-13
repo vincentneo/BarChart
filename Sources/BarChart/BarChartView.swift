@@ -64,7 +64,6 @@ public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : Vi
                 self.selectionView
                 BarChartCollectionView(yAxis: self.yAxis,
                                        xAxis: self.xAxis,
-                                       fill: self.config.data.fill,
                                        selectionCallback: self.$selectionCallback)
             }
         }

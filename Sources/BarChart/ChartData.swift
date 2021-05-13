@@ -45,7 +45,6 @@ public struct ChartDataEntry<S: ShapeStyle>: Identifiable, Equatable {
 
 public struct ChartData<S: ShapeStyle> {
     public var entries: [ChartDataEntry<S>] = []
-    public var fill: S = Color.red as! S
     
     var yValues: [Double] {
         return self.entries.map { $0.y }
