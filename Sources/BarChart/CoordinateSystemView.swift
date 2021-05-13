@@ -163,7 +163,7 @@ struct YAxisView: View {
 
 struct YAxisLabelView: View {
     let yAxis: YAxis
-    let frameSize: CGSize
+    let height: CGFloat
     
     var body: some View {
         ForEach((0..<self.yAxis.formattedLabels().count), id: \.self) { index in
@@ -178,7 +178,7 @@ struct YAxisLabelView: View {
     
     func labelOffsetY(at index: Int) -> CGFloat {
         let tickY = self.tickY(at: index)
-        let height = self.frameSize.height
+        let height = self.height
         let y = (height - tickY) - (height / 2)
         return y
     }
