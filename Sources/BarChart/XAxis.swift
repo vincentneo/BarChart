@@ -26,9 +26,9 @@
 
 import SwiftUI
 
-struct XAxis: Identifiable {
+struct XAxis<Fill: ShapeStyle>: Identifiable {
     let id = UUID()
-    let data: [ChartDataEntry]
+    let data: [ChartDataEntry<Fill>]
     let frameWidth: CGFloat
     let ref: XAxisReference
     let labelsCTFont: CTFont
@@ -38,7 +38,7 @@ struct XAxis: Identifiable {
     }
         
     init(frameWidth: CGFloat = 0,
-         data: [ChartDataEntry] = [],
+         data: [ChartDataEntry<Fill>] = [],
          ref: XAxisReference = XAxisReference(),
          labelsCTFont: CTFont = ChartConfigurtationDefaults.ctFont) {
         self.labelsCTFont = labelsCTFont
@@ -47,7 +47,7 @@ struct XAxis: Identifiable {
         self.ref = ref
     }
     
-    func chartEntry(at index: Int) -> ChartDataEntry {
+    func chartEntry(at index: Int) -> ChartDataEntry<Fill> {
         return self.labels()[index]
     }
     
@@ -55,7 +55,7 @@ struct XAxis: Identifiable {
         return self.labels().map { $0.x }
     }
     
-    private func labels() -> [ChartDataEntry] {
+    private func labels() -> [ChartDataEntry<Fill>] {
         guard !self.data.isEmpty else { return [] }
         let totalLabelsWidth = self.data.compactMap { $0.x.width(ctFont: self.labelsCTFont) }.reduce(0, +)
         let averageLabelWidth = totalLabelsWidth / CGFloat(data.count)
@@ -75,9 +75,9 @@ struct XAxis: Identifiable {
     }
     
     private func calculateLabels(with interval: Int,
-                                 to maxLabelsCount: Int) -> [ChartDataEntry] {
+                                 to maxLabelsCount: Int) -> [ChartDataEntry<Fill>] {
         let reversedData = Array(self.data.reversed())
-        var finalLabels = [ChartDataEntry]()
+        var finalLabels = [ChartDataEntry<Fill>]()
         for index in stride(from: 0, through: self.data.count - 1, by: interval) {
             finalLabels.append(reversedData[index])
         }

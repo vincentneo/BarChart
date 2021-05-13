@@ -30,7 +30,7 @@ public typealias BarChartView = SelectableBarChartView<EmptyView, Color>
 
 #if !os(tvOS)
 public extension SelectableBarChartView {
-    func onBarSelection(_ callback: @escaping (ChartDataEntry, CGPoint) -> ()) -> Self {
+    func onBarSelection(_ callback: @escaping (ChartDataEntry<Fill>, CGPoint) -> ()) -> Self {
         SelectableBarChartView(config: self.config, selectionCallback: callback)
     }
     

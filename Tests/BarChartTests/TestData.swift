@@ -24,15 +24,15 @@
 //  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import SwiftUI
 @testable import BarChart
 
 struct TestData {
     
-    static func generate(with values: [Double]) -> [ChartDataEntry] {
-        var entries = [ChartDataEntry]()
+    static func generate(with values: [Double]) -> [ChartDataEntry<LinearGradient>] {
+        var entries = [ChartDataEntry<LinearGradient>]()
         for (index, value) in values.enumerated() {
-            let newEntry = ChartDataEntry(x: "\(index)", y: value)
+            let newEntry = ChartDataEntry(x: "\(index)", y: value, fill: LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
             entries.append(newEntry)
         }
         return entries

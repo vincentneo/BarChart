@@ -26,19 +26,19 @@
 
 import SwiftUI
 
-public struct ChartDataEntry: Identifiable, Equatable {
+public struct ChartDataEntry<S: ShapeStyle>: Identifiable, Equatable {
     public var id = UUID()
     public var x: String
     public var y: Double
+    public var fill: S
     
-    public init(x: String, y: Double) {
-        self.x = x
-        self.y = y
+    public static func == (lhs: ChartDataEntry<S>, rhs: ChartDataEntry<S>) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
 public struct ChartData<S: ShapeStyle> {
-    public var entries: [ChartDataEntry] = []
+    public var entries: [ChartDataEntry<S>] = []
     public var fill: S = Color.red as! S
     
     var yValues: [Double] {

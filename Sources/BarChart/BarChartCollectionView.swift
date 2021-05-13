@@ -28,9 +28,9 @@ import SwiftUI
 
 struct BarChartCollectionView<S: ShapeStyle>: View {
     let yAxis: YAxis
-    let xAxis: XAxis
+    let xAxis: XAxis<S>
     let fill: S
-    @Binding var selectionCallback: ((ChartDataEntry, CGPoint) -> Void)?
+    @Binding var selectionCallback: ((ChartDataEntry<S>, CGPoint) -> Void)?
     
     var body: some View {
         HStack(alignment: .bottom, spacing: self.xAxis.layout.spacing ?? 0) {

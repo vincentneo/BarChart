@@ -28,9 +28,9 @@ import SwiftUI
 
 public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : View {
     @ObservedObject var config: ChartConfiguration<Fill>
-    @State var xAxis = XAxis()
+    @State var xAxis = XAxis<Fill>()
     @State var yAxis = YAxis()
-    @State var selectionCallback: ((ChartDataEntry, CGPoint) -> Void)?
+    @State var selectionCallback: ((ChartDataEntry<Fill>, CGPoint) -> Void)?
     var selectionView: SelectionView?
     
     public init(config: ChartConfiguration<Fill>) {
@@ -38,7 +38,7 @@ public struct SelectableBarChartView<SelectionView: View, Fill: ShapeStyle> : Vi
     }
     
     init(config: ChartConfiguration<Fill>,
-         selectionCallback: ((ChartDataEntry, CGPoint) -> Void)? = nil,
+         selectionCallback: ((ChartDataEntry<Fill>, CGPoint) -> Void)? = nil,
          selectionView: SelectionView? = nil) {
         self.init(config: config)
         self._selectionCallback = State(wrappedValue: selectionCallback)

@@ -26,9 +26,9 @@
 
 import SwiftUI
 
-struct CoordinateSystemView: View {
+struct CoordinateSystemView<Fill: ShapeStyle>: View {
     let yAxis: YAxis
-    let xAxis: XAxis
+    let xAxis: XAxis<Fill>
     let frameSize: CGSize
     
     var body: some View {
@@ -86,8 +86,8 @@ struct LabelView: View {
     }
 }
 
-struct XAxisView: View {
-    let xAxis: XAxis
+struct XAxisView<Fill: ShapeStyle>: View {
+    let xAxis: XAxis<Fill>
     let frameSize: CGSize
     
     var body: some View {
