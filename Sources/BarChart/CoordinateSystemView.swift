@@ -138,19 +138,8 @@ struct YAxisView: View {
                          style: self.yAxis.ref.ticksStyle,
                          color: self.yAxis.ref.ticksColor,
                          isInverted: true, isYAt0: self.yAxis.labelValue(at: index) == 0)
-                LabelView(text: self.yAxis.formattedLabels()[index],
-                          ctFont: self.yAxis.labelsCTFont,
-                          color: self.yAxis.ref.labelsColor)
-                    .offset(y: self.labelOffsetY(at: index))
             }
         }
-    }
-    
-    func labelOffsetY(at index: Int) -> CGFloat {
-        let tickY = self.tickY(at: index)
-        let height = self.frameSize.height
-        let y = (height - tickY) - (height / 2)
-        return y
     }
     
     func tickY(at index: Int) -> CGFloat {
@@ -169,5 +158,36 @@ struct YAxisView: View {
     func tickPoints(y: CGFloat) -> (CGPoint, CGPoint) {
         let endPointX = self.frameSize.width - self.yAxis.maxLabelWidth
         return (CGPoint(x: 0, y: y), CGPoint(x: endPointX, y: y))
+    }
+}
+
+struct YAxisLabelView: View {
+    let yAxis: YAxis
+    let frameSize: CGSize
+    
+    var body: some View {
+        ForEach((0..<self.yAxis.formattedLabels().count), id: \.self) { index in
+            HStack(alignment: .center) {
+                LabelView(text: self.yAxis.formattedLabels()[index],
+                          ctFont: self.yAxis.labelsCTFont,
+                          color: self.yAxis.ref.labelsColor)
+                            .offset(y: self.labelOffsetY(at: index))
+            }
+        }
+    }
+    
+    func labelOffsetY(at index: Int) -> CGFloat {
+        let tickY = self.tickY(at: index)
+        let height = self.frameSize.height
+        let y = (height - tickY) - (height / 2)
+        return y
+    }
+    
+    func tickY(at index: Int) -> CGFloat {
+        guard let chartMin = self.yAxis.scaler?.scaledMin,
+            let pixelsRatio = self.yAxis.pixelsRatio(),
+            let label = self.yAxis.labelValue(at: index) else { return 0 }
+        let shift = String().height(ctFont: self.yAxis.labelsCTFont) * 1.5
+        return (CGFloat(label) - CGFloat(chartMin)) * pixelsRatio + shift
     }
 }
