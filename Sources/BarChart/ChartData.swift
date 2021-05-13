@@ -32,6 +32,12 @@ public struct ChartDataEntry<S: ShapeStyle>: Identifiable, Equatable {
     public var y: Double
     public var fill: S
     
+    public init(x: String, y: Double, fill: S) {
+        self.x = x
+        self.y = y
+        self.fill = fill
+    }
+    
     public static func == (lhs: ChartDataEntry<S>, rhs: ChartDataEntry<S>) -> Bool {
         return lhs.id == rhs.id
     }
