@@ -135,7 +135,7 @@ struct YAxisView: View {
     
     var body: some View {
         ForEach((0..<self.yAxis.formattedLabels().count), id: \.self) { index in
-            HStack(alignment: .center, spacing: 10) {
+            HStack(alignment: .center) {
                 TickView(points: self.tickPoints(index: index),
                          style: self.yAxis.ref.ticksStyle,
                          color: self.yAxis.ref.ticksColor,
@@ -143,7 +143,7 @@ struct YAxisView: View {
                 LabelView(text: self.yAxis.formattedLabels()[index],
                           ctFont: self.yAxis.labelsCTFont,
                           color: self.yAxis.ref.labelsColor)
-                    .offset(y: self.labelOffsetY(at: index))
+                    .offset(x: 10, y: self.labelOffsetY(at: index))
             }
         }
     }
