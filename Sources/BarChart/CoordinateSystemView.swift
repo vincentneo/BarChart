@@ -83,6 +83,8 @@ struct LabelView: View {
         Text(self.text)
             .font(Font(self.ctFont))
             .foregroundColor(self.color)
+            .multilineTextAlignment(.trailing)
+            .frame(alignment: .trailing)
     }
 }
 
@@ -142,6 +144,7 @@ struct YAxisView: View {
                           ctFont: self.yAxis.labelsCTFont,
                           color: self.yAxis.ref.labelsColor)
                     .offset(y: self.labelOffsetY(at: index))
+                    .padding(.leading, 5)
             }
         }
     }
