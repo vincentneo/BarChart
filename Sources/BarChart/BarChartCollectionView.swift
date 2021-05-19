@@ -59,7 +59,6 @@ struct BarChartCollectionView<S: ShapeStyle>: View {
     
     func offsetY(at index: Int) -> CGFloat {
         guard let maxNormalizedValue = self.yAxis.normalizedValues().max() else { return 0 }
-        print(maxNormalizedValue)
         let chartNormalisedMax = maxNormalizedValue > 0 ? maxNormalizedValue : 0
         let absoluteMax = abs(CGFloat(chartNormalisedMax))
         var offset = self.calculateTopOffset(for: absoluteMax)

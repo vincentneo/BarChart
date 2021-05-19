@@ -143,7 +143,7 @@ struct YAxisView: View {
                 LabelView(text: self.yAxis.formattedLabels()[index],
                           ctFont: self.yAxis.labelsCTFont,
                           color: self.yAxis.ref.labelsColor)
-                    .offset(x: 10, y: self.labelOffsetY(at: index))
+                   // .offset(x: 10, y: self.labelOffsetY(at: index))
             }
         }
     }
