@@ -140,11 +140,10 @@ struct YAxisView: View {
                          style: self.yAxis.ref.ticksStyle,
                          color: self.yAxis.ref.ticksColor,
                          isInverted: true, isYAt0: self.yAxis.labelValue(at: index) == 0)
-                Text("i\(index)")
                 LabelView(text: self.yAxis.formattedLabels()[index],
                           ctFont: self.yAxis.labelsCTFont,
                           color: self.yAxis.ref.labelsColor)
-                    .offset(x: 10, y: self.labelOffsetY(at: index))
+                   // .offset(x: 10, y: self.labelOffsetY(at: index))
             }
         }
     }
